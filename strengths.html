@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>強みをふり返る24の質問</title>
+<style>
+  :root { --ink:#1b1b1b; --blue:#1f4e79; --pale:#f4f8fc; --line:#cfd8e3; --gold:#c9a227; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; color:var(--ink); background:#fff; line-height:1.6; font-size:17px; }
+  main { max-width: 680px; margin: 0 auto; padding: 16px 16px 80px; }
+  h1 { font-size: 1.5rem; line-height:1.3; margin: 8px 0 4px; }
+  .sub { color:#555; margin:0 0 16px; font-size:.95rem; }
+  .card { border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:12px 0; background:#fff; }
+  .card.pale { background:var(--pale); border-color:var(--blue); }
+  .q { border-top:1px solid var(--line); padding:14px 0 10px; }
+  .q:first-of-type { border-top:0; }
+  .q .n { color:var(--blue); font-weight:700; font-size:.9rem; }
+  .q .t { font-weight:700; font-size:1.05rem; margin:2px 0 8px; }
+  .scale { display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap:5px; }
+  .scale label { display:block; min-width:0; text-align:center; border:1.5px solid var(--line); border-radius:10px; padding:10px 0 6px; cursor:pointer; font-size:.72rem; color:#444; user-select:none; line-height:1.2; }
+  .scale label b { display:block; font-size:1.25rem; color:var(--blue); }
+  .scale input { position:absolute; opacity:0; width:0; height:0; }
+  .scale input:checked + label { background:var(--blue); color:#fff; border-color:var(--blue); }
+  .scale input:checked + label b { color:#fff; }
+  .scale input:focus-visible + label { outline:3px solid var(--gold); }
+  .bar { position:sticky; top:0; background:#fff; border-bottom:1px solid var(--line); padding:8px 0; z-index:2; display:flex; justify-content:space-between; align-items:center; font-size:.9rem; }
+  .bar .prog { height:6px; background:#e6ecf3; border-radius:3px; flex:1; margin:0 12px; overflow:hidden; }
+  .bar .prog i { display:block; height:100%; background:var(--blue); width:0; transition:width .2s; }
+  button { font: inherit; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; border:0; border-radius:10px; padding:14px 22px; font-size:1.05rem; font-weight:700; cursor:pointer; width:100%; }
+  .btn[disabled] { background:#9bb3cc; cursor:not-allowed; }
+  .btn.ghost { background:#fff; color:var(--blue); border:1.5px solid var(--blue); }
+  .row { display:flex; gap:10px; }
+  .row .btn { width:auto; flex:1; }
+  .hint { font-size:.9rem; color:#555; }
+  .meta { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+  .meta label { font-size:.85rem; color:#555; display:block; }
+  .meta input { width:100%; font:inherit; padding:8px 10px; border:1px solid var(--line); border-radius:8px; }
+  /* 結果 */
+  #result { display:none; }
+  .top5 { counter-reset: r; }
+  .top5 .item { display:grid; grid-template-columns: 34px 1fr; gap:10px; align-items:start; padding:10px 0; border-top:1px solid var(--line); }
+  .top5 .item:first-child { border-top:0; }
+  .top5 .rank { width:30px; height:30px; border-radius:50%; background:var(--blue); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .top5 .name { font-weight:700; font-size:1.05rem; }
+  .top5 .desc { font-size:.92rem; color:#444; }
+  .top5 .write { margin-top:6px; font-size:.85rem; color:#666; border-bottom:1px dashed #999; padding-bottom:2px; }
+  .all { font-size:.9rem; }
+  .all .r { display:grid; grid-template-columns: 26px 150px 1fr 24px; gap:6px; align-items:center; padding:3px 0; }
+  .all .r .b { height:10px; background:#e6ecf3; border-radius:5px; overflow:hidden; }
+  .all .r .b i { display:block; height:100%; background:var(--blue); }
+  .all .r.top .b i { background:var(--gold); }
+  .all .r .s { text-align:right; color:#555; }
+  .pick { border:2px solid var(--gold); background:#fff8e1; }
+  .pick label { display:flex; gap:8px; align-items:center; padding:8px 0; border-top:1px solid #eadfb0; font-size:1rem; cursor:pointer; }
+  .pick label:first-of-type { border-top:0; }
+  .pick input { width:22px; height:22px; }
+  .note { border-left:4px solid var(--gold); background:#fff8e1; padding:8px 12px; margin:12px 0; font-size:.92rem; }
+  .fine { font-size:.78rem; color:#666; margin-top:24px; line-height:1.5; }
+  @media print {
+    @page { size: A4; margin: 9mm 12mm; }
+    body { font-size: 10pt; line-height:1.35; }
+    main { max-width:none; padding:0; }
+    .noprint, #form, .bar { display:none !important; }
+    #result { display:block !important; }
+    .card { break-inside: avoid; border-color:#999; padding:8px 12px; margin:8px 0; }
+    h1 { font-size:1.15rem; margin:0 0 2px; }
+    .sub { margin:0 0 6px; }
+    .top5 .item { padding:4px 0; }
+    .top5 .rank { width:24px; height:24px; font-size:.9rem; }
+    .top5 .desc { font-size:.85rem; }
+    .top5 .write { margin-top:3px; }
+    .note { font-size:.85rem; padding:6px 10px; margin:8px 0; }
+    .all .r .b { height:6px; }
+    .all { font-size:.82rem; }
+    .all .r { padding:0; }
+    .top5 .name { font-size:.95rem; }
+    .fine { font-size:7pt; margin-top:4px; line-height:1.3; }
+    .all .r { line-height:1.2; }
+    .all .r { grid-template-columns: 22px 130px 1fr 22px; padding:1px 0; }
+    .all .r .b i { background:#1f4e79 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .all .r.top .b i { background:#c9a227 !important; }
+    .top5 .rank { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<section id="form">
+  <h1>強みをふり返る24の質問</h1>
+  <p class="sub">48の文を読んで、いまの自分にどれくらい当てはまるかを選びます（24の強み × 2問）。6〜8分。正解はありません。終わると、その場で結果が出て、PDF にできます。</p>
+
+  <div class="card pale">
+    <div class="meta">
+      <div><label for="nick">名前かニックネーム（書かなくてよい）</label><input id="nick" type="text" placeholder="例: なおき" autocomplete="off"></div>
+      <div><label for="date">日付</label><input id="date" type="date"></div>
+    </div>
+    <p class="hint" style="margin:10px 0 0">答えはこの端末の中だけで計算します。どこにも送りません。</p>
+  </div>
+
+  <div class="bar"><span id="cnt">0 / 48</span><span class="prog"><i id="prog"></i></span><span class="hint">1＝ぜんぜん違う　5＝とてもそう</span></div>
+
+  <div id="qs"></div>
+
+  <div class="card">
+    <button class="btn" id="go" disabled>結果を見る（あと <span id="left">48</span> 問）</button>
+    <p class="hint" style="margin:8px 0 0">迷ったら、最初に浮かんだほうで。「よく見せよう」としなくて大丈夫です。</p>
+  </div>
+</section>
+
+<section id="result">
+  <h1 style="font-size:1.3rem">あなたの強み — 上位5つ</h1>
+  <p class="sub" id="who"></p>
+
+  <div class="card pick noprint" id="pick" style="display:none"></div>
+  <div class="card top5" id="top5"></div>
+
+  <div class="note">順位は「他の人との比較」ではなく、<b>自分の中での順番</b>です。下のほうは弱みではなく、いま あまり使っていない強みです。上位5つについて、「最近それを使った場面」を思い出してみてください。</div>
+
+  <div class="card">
+    <div style="font-weight:700;margin-bottom:6px">24の強み（自分の中での順番。点は2問の合計、2〜10）</div>
+    <div class="all" id="all"></div>
+  </div>
+
+  <div class="row noprint" style="margin-top:12px">
+    <button class="btn" id="pdf">PDF にする・印刷する</button>
+    <button class="btn ghost" id="redo">やり直す</button>
+  </div>
+  <p class="hint noprint" style="margin-top:8px">「PDF にする」を押すと印刷の画面が出ます。プリンターの欄で「PDF に保存」（iPhone は右上の共有 → ファイルに保存）を選ぶと PDF になります。</p>
+
+  <p class="fine">
+    この診断は、24の「性格の強み」の分類（Peterson, C., &amp; Seligman, M. E. P. (2004). <i>Character strengths and virtues: A handbook and classification</i>. Oxford University Press / APA。VIA Institute on Character の VIA Classification）に基づいて、自分をふり返るために作った<b>簡易版</b>です。VIA Survey ではなく、研究で検証されたものでもありません。向いている職業を当てるものでも、人を評価するためのものでもありません。公式の無料診断は https://www.viacharacter.org/ にあります。<br>
+    非営利・無料。答えは端末の外に送られません。版2（2026-11-04・48問）。
+  </p>
+</section>
+
+</main>
+
+<script>
+// 24の強み: 分類は Peterson & Seligman (2004)。文はこの道具のための自前の言い換え（VIA Survey の設問ではない）
+const STRENGTHS = [
+  ["創造性", "新しいやり方や、ちょっと変わった案を思いつくのが好きだ", "同じやり方を続けるより、別の手を試したくなる"],
+  ["好奇心", "知らないことがあると、つい調べたり聞いたりしてしまう", "初めての場所や新しい話題に、わくわくする"],
+  ["判断力", "決める前に、反対の見方や別の可能性も考える", "人の意見をうのみにせず、根拠を確かめてから判断する"],
+  ["向学心", "新しいことを覚えるのが、それ自体で楽しい", "誰にも頼まれなくても、気になることを自分で学び続ける"],
+  ["大局観", "人から相談されると、全体を整理して「こう見える」と返せる", "まわりの人から、相談相手として頼られることが多い"],
+  ["勇敢さ", "怖くても、言うべきことは言うし、やるべきことはやる", "みんなが黙っているとき、自分の考えを言える"],
+  ["粘り強さ", "一度始めたことは、途中でつらくても最後までやり通す", "うまくいかなくても、やり方を変えてもう一度やる"],
+  ["誠実さ", "できないことは「できない」と言う。自分を飾らない", "約束したことは守る。人によって態度を変えない"],
+  ["熱意", "毎日を、元気と勢いをもって生きている", "何かを始めるとき、全力で飛び込むほうだ"],
+  ["愛情", "近い人を大切にし、大切にされることも受け取れる", "大切な人には、気持ちを言葉や行動で伝える"],
+  ["親切心", "頼まれる前に、人のために手を貸すことが多い", "困っている人を見ると、放っておけない"],
+  ["社会的知性", "その場の空気や相手の気持ちに気づいて、言い方を変えられる", "初めての集まりでも、どうふるまえばいいかが分かる"],
+  ["チームワーク", "グループでは、自分の分担だけでなく全体のためにも動く", "グループで決めたことには、自分の意見と違っても協力する"],
+  ["公平さ", "好き嫌いで人の扱いを変えない。みんなに同じように接する", "自分が得をするときでも、ずるいやり方は選ばない"],
+  ["リーダーシップ", "誰も動かないとき、最初に段取りを言って人を動かす", "みんなの意見をまとめて、次に何をするか決めるのが得意だ"],
+  ["寛容さ", "ミスした人や傷つけられた相手を、引きずらずにゆるせる", "人の失敗を、いつまでも責めない"],
+  ["謙虚さ", "自分の手柄を自分から言わない。目立たなくても平気だ", "ほめられると、まわりの人のおかげだと思う"],
+  ["思慮深さ", "あとで後悔しないように、先のことを考えてから動く", "言う前に、それを言ったらどうなるかを一度考える"],
+  ["自己調整", "気分に左右されず、決めたことを続けられる", "やるべきことがあれば、遊びたい気持ちを後回しにできる"],
+  ["審美眼", "きれいなもの、見事な仕事、上手な人に心が動く", "自然や音楽や作品に、思わず見入ってしまうことがある"],
+  ["感謝", "助けてもらったことに気づいて、言葉にして伝える", "一日の中で、ありがたいと思う瞬間がよくある"],
+  ["希望", "これから良くなると信じて、そのために動ける", "困ったことがあっても、なんとかなると思える"],
+  ["ユーモア", "人を笑わせたり、物事の明るい面を見つけたりするのが得意だ", "重い空気のとき、少し笑える一言で場をやわらげられる"],
+  ["スピリチュアリティ", "自分より大きな何か（意味・使命・信じるもの）とのつながりを感じる", "自分の人生には、何か意味や役割があると感じる"],
+];
+const SCALE = [[1,"ぜんぜん違う"],[2,"あまり違う"],[3,"どちらとも"],[4,"わりとそう"],[5,"とてもそう"]];
+const $ = s => document.querySelector(s);
+const qs = $("#qs");
+const ITEMS = [];   // {s: 強みの番号, text}。前半は各強みの1問目、後半は2問目（同じ強みの2問が離れるように）
+[1, 2].forEach(pass => STRENGTHS.forEach((st, i) => ITEMS.push({ s: i, text: st[pass] })));
+const N = ITEMS.length;  // 48
+ITEMS.forEach((it, i) => {
+  const d = document.createElement("div"); d.className = "q";
+  d.innerHTML = `<div class="n">${i+1} / ${N}</div><div class="t">${it.text}</div><div class="scale">` +
+    SCALE.map(([v,l]) => `<input type="radio" name="q${i}" id="q${i}v${v}" value="${v}"><label for="q${i}v${v}"><b>${v}</b>${l}</label>`).join("") + `</div>`;
+  qs.appendChild(d);
+});
+$("#date").value = new Date().toLocaleDateString("sv-SE");
+function answered() { return ITEMS.map((_, i) => { const r = document.querySelector(`input[name=q${i}]:checked`); return r ? +r.value : null; }); }
+// 強みごとの点 = 2問の合計（2〜10）
+function scores(a) { const sc = STRENGTHS.map(() => 0); a.forEach((v, i) => { sc[ITEMS[i].s] += v; }); return sc; }
+function refresh() {
+  const a = answered(), n = a.filter(v => v !== null).length;
+  $("#cnt").textContent = `${n} / ${N}`; $("#prog").style.width = (n/N*100) + "%";
+  $("#left").textContent = N - n; $("#go").disabled = n < N;
+  if (n === N) $("#go").textContent = "結果を見る";
+}
+qs.addEventListener("change", refresh);
+let picked = new Set();
+function show(a) {
+  const sc = scores(a);
+  const rows = STRENGTHS.map(([name, text], i) => ({ i, name, text, v: sc[i] }));
+  // 安定ソート: 点が同じなら元の順（分類の順）
+  const sorted = rows.slice().sort((x, y) => y.v - x.v || x.i - y.i);
+  let rank = 0, prev = null;
+  sorted.forEach((r, k) => { if (r.v !== prev) { rank = k + 1; prev = r.v; } r.rank = rank; });
+  const v5 = sorted[4].v;
+  const above = sorted.filter(r => r.v > v5);          // 5位の点より上（確定）
+  const tied = sorted.filter(r => r.v === v5);         // 5位の点と同点（絞る対象）
+  const need = 5 - above.length;
+  const nick = $("#nick").value.trim(), date = $("#date").value;
+  $("#who").textContent = (nick ? nick + "さん　" : "") + (date ? date.replaceAll("-", "/") : "");
+  const pick = $("#pick");
+  if (tied.length > need) {
+    pick.style.display = "block";
+    pick.innerHTML = `<div style="font-weight:700;margin-bottom:4px">同じ点のものが ${tied.length} 個あります</div><div class="hint" style="margin-bottom:6px">この中から、<b>いちばん自分らしい</b>と思うものを ${need} 個選んでください（上位5つに入ります）。残りは6位以下として並びます。</div>` +
+      tied.map(r => `<label><input type="checkbox" value="${r.i}" ${picked.has(r.i) ? "checked" : ""}><span><b>${r.name}</b>　<span class="hint">${r.text}</span></span></label>`).join("");
+    pick.querySelectorAll("input").forEach(cb => cb.addEventListener("change", () => {
+      if (cb.checked && picked.size >= need) { cb.checked = false; return; }
+      cb.checked ? picked.add(+cb.value) : picked.delete(+cb.value); show(a);
+    }));
+  } else { pick.style.display = "none"; picked.clear(); }
+  const chosen = tied.filter(r => picked.has(r.i));
+  const rest = tied.filter(r => !picked.has(r.i));
+  const top = above.concat(tied.length > need ? chosen : tied);
+  const order = above.concat(tied.length > need ? chosen.concat(rest) : tied).concat(sorted.filter(r => r.v < v5));
+  $("#top5").innerHTML = (top.length ? top.map((r, k) => `<div class="item"><div class="rank">${k + 1}</div><div><div class="name">${r.name}</div><div class="desc">${r.text}</div><div class="write">最近これを使った場面:</div></div></div>`).join("") : "")
+    + (top.length < 5 ? `<div class="item"><div class="rank" style="background:#c9a227">?</div><div class="hint">上の黄色い枠で ${5 - top.length} 個選ぶと、ここに入ります</div></div>` : "");
+  const done = tied.length <= need || picked.size >= need;   // 上位5つが確定したか
+  const topSet = new Set(top.map(r => r.i));
+  $("#all").innerHTML = order.map((r, k) => {
+    const isTop = topSet.has(r.i);
+    const shown = isTop ? k + 1 : (done && r.v === v5 ? top.length + 1 : r.rank);
+    return `<div class="r ${isTop ? "top" : ""}"><span>${shown}</span><span>${r.name}</span><span class="b"><i style="width:${(r.v - 2) / 8 * 100}%"></i></span><span class="s">${r.v}</span></div>`;
+  }).join("");
+  $("#form").style.display = "none"; $("#result").style.display = "block";
+}
+$("#go").addEventListener("click", () => { const a = answered(); if (a.every(v => v !== null)) { picked.clear(); show(a); window.scrollTo(0, 0); } });
+$("#pdf").addEventListener("click", () => { if ($("#pick").style.display === "block" && picked.size < 5) { alert("先に、黄色い枠で上位5つに入れるものを選んでください"); return; } window.print(); });
+$("#redo").addEventListener("click", () => { if (confirm("答えを消して最初からやり直しますか？")) location.reload(); });
+// 確認用: ?demo=1 で仮の答えを入れて結果を出す（本番では使わない）
+const demo = new URLSearchParams(location.search).get("demo");
+if (demo) { const a = ITEMS.map((it, i) => demo === "2" ? (it.s % 4 === 0 ? 5 : 1 + (it.s % 3)) : 1 + ((it.s * 7 + i) % 5)); $("#nick").value = "テスト"; show(a); }
+refresh();
+</script>
+</body>
+</html>

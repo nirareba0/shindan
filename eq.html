@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>感情とのつきあい方をふり返る20の質問</title>
+<style>
+  :root { --ink:#1b1b1b; --blue:#1f4e79; --pale:#f4f8fc; --line:#cfd8e3; --gold:#c9a227; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; color:var(--ink); background:#fff; line-height:1.6; font-size:17px; }
+  main { max-width: 680px; margin: 0 auto; padding: 16px 16px 80px; }
+  h1 { font-size: 1.5rem; line-height:1.3; margin: 8px 0 4px; }
+  .sub { color:#555; margin:0 0 16px; font-size:.95rem; }
+  .back { font-size:.9rem; color:var(--blue); text-decoration:none; }
+  .card { border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:12px 0; background:#fff; }
+  .card.pale { background:var(--pale); border-color:var(--blue); }
+  .q { border-top:1px solid var(--line); padding:14px 0 10px; }
+  .q:first-of-type { border-top:0; }
+  .q .n { color:var(--blue); font-weight:700; font-size:.9rem; }
+  .q .t { font-weight:700; font-size:1.05rem; margin:2px 0 8px; }
+  .scale { display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap:5px; }
+  .scale label { display:block; min-width:0; text-align:center; border:1.5px solid var(--line); border-radius:10px; padding:10px 0 6px; cursor:pointer; font-size:.72rem; color:#444; user-select:none; line-height:1.2; }
+  .scale label b { display:block; font-size:1.25rem; color:var(--blue); }
+  .scale input { position:absolute; opacity:0; width:0; height:0; }
+  .scale input:checked + label { background:var(--blue); color:#fff; border-color:var(--blue); }
+  .scale input:checked + label b { color:#fff; }
+  .scale input:focus-visible + label { outline:3px solid var(--gold); }
+  .bar { position:sticky; top:0; background:#fff; border-bottom:1px solid var(--line); padding:8px 0; z-index:2; display:flex; justify-content:space-between; align-items:center; font-size:.9rem; }
+  .bar .prog { height:6px; background:#e6ecf3; border-radius:3px; flex:1; margin:0 12px; overflow:hidden; }
+  .bar .prog i { display:block; height:100%; background:var(--blue); width:0; transition:width .2s; }
+  button { font: inherit; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; border:0; border-radius:10px; padding:14px 22px; font-size:1.05rem; font-weight:700; cursor:pointer; width:100%; }
+  .btn[disabled] { background:#9bb3cc; cursor:not-allowed; }
+  .btn.ghost { background:#fff; color:var(--blue); border:1.5px solid var(--blue); }
+  .row { display:flex; gap:10px; }
+  .row .btn { width:auto; flex:1; }
+  .hint { font-size:.9rem; color:#555; }
+  .meta { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+  .meta label { font-size:.85rem; color:#555; display:block; }
+  .meta input { width:100%; font:inherit; padding:8px 10px; border:1px solid var(--line); border-radius:8px; }
+  #result { display:none; }
+  .facet { padding:10px 0; border-top:1px solid var(--line); }
+  .facet:first-child { border-top:0; }
+  .facet .head { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .facet .name { font-weight:700; font-size:1.05rem; }
+  .facet .sc { color:#555; font-size:.9rem; white-space:nowrap; }
+  .facet .b { height:12px; background:#e6ecf3; border-radius:6px; overflow:hidden; margin:6px 0 4px; }
+  .facet .b i { display:block; height:100%; background:var(--blue); }
+  .facet.hi .b i { background:var(--gold); }
+  .facet .desc { font-size:.92rem; color:#444; }
+  .facet .write { margin-top:6px; font-size:.85rem; color:#666; border-bottom:1px dashed #999; padding-bottom:2px; }
+  .tag { display:inline-block; font-size:.75rem; border-radius:6px; padding:0 6px; margin-left:6px; vertical-align:middle; }
+  .tag.hi { background:#fff3c4; color:#7a5c00; }
+  .tag.lo { background:#e6ecf3; color:#1f4e79; }
+  .note { border-left:4px solid var(--gold); background:#fff8e1; padding:8px 12px; margin:12px 0; font-size:.92rem; }
+  .fine { font-size:.78rem; color:#666; margin-top:24px; line-height:1.5; }
+  @media print {
+    @page { size: A4; margin: 9mm 12mm; }
+    body { font-size: 10pt; line-height:1.35; }
+    main { max-width:none; padding:0; }
+    .noprint, #form, .bar { display:none !important; }
+    #result { display:block !important; }
+    .card { break-inside: avoid; border-color:#999; padding:8px 12px; margin:8px 0; }
+    h1 { font-size:1.15rem; margin:0 0 2px; }
+    .facet .b i, .tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .fine { font-size:7pt; margin-top:4px; line-height:1.3; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<section id="form">
+  <a class="back" href="./">← 診断の入口へ</a>
+  <h1>感情とのつきあい方をふり返る20の質問</h1>
+  <p class="sub">自分の気持ちや相手の気持ちと、ふだんどうつきあっているかを、4つの面から見ます。20問・3〜4分。正解はありません。終わると、その場で結果が出て、PDF にできます。</p>
+
+  <div class="card pale">
+    <div class="meta">
+      <div><label for="nick">名前かニックネーム（書かなくてよい）</label><input id="nick" type="text" placeholder="例: なおき" autocomplete="off"></div>
+      <div><label for="date">日付</label><input id="date" type="date"></div>
+    </div>
+    <p class="hint" style="margin:10px 0 0">答えはこの端末の中だけで計算します。どこにも送りません。</p>
+  </div>
+
+  <div class="bar"><span id="cnt">0 / 20</span><span class="prog"><i id="prog"></i></span><span class="hint">1＝ぜんぜん違う　5＝とてもそう</span></div>
+
+  <div id="qs"></div>
+
+  <div class="card">
+    <button class="btn" id="go" disabled>結果を見る（あと <span id="left">20</span> 問）</button>
+    <p class="hint" style="margin:8px 0 0">迷ったら、最初に浮かんだほうで。「よく見せよう」としなくて大丈夫です。</p>
+  </div>
+</section>
+
+<section id="result">
+  <h1 style="font-size:1.3rem">感情とのつきあい方 — 4つの面</h1>
+  <p class="sub" id="who"></p>
+
+  <div class="card" id="facets"></div>
+
+  <div class="note">点は「他の人との比較」ではなく、<b>自分の中でどの面が出やすいか</b>です。低い面は欠点ではなく、これから使い方を覚えられる面です。高い面と低い面について、「最近それが出た場面」を思い出してみてください。</div>
+
+  <div class="row noprint" style="margin-top:12px">
+    <button class="btn" id="pdf">PDF にする・印刷する</button>
+    <button class="btn ghost" id="redo">やり直す</button>
+  </div>
+  <p class="hint noprint" style="margin-top:8px">「PDF にする」を押すと印刷の画面が出ます。プリンターの欄で「PDF に保存」（iPhone は右上の共有 → ファイルに保存）を選ぶと PDF になります。</p>
+
+  <p class="fine">
+    この質問は、感情知性（EQ）の研究でよく使われる4つの面（自分の感情に気づく／相手の感情を読む／感情を活用する／感情を整える。Wong, C.-S., &amp; Law, K. S. (2002). <i>The Leadership Quarterly</i>, 13(3), 243–274 の枠組み）をもとに、自分をふり返るために作った<b>簡易版</b>です。文はこのページのために書いたもので、研究用の尺度ではなく、研究で検証されたものでもありません。「EQ の数値」ではなく、人を評価するためのものでもありません。<br>
+    非営利・無料。答えは端末の外に送られません。版1（2026-11-04）。
+  </p>
+</section>
+
+</main>
+
+<script>
+// 4つの面 × 5問。文はこのページのための自前のもの（研究用の尺度の設問ではない）
+const FACETS = [
+  ["自分の気持ちに気づく", "いま自分がどんな気持ちで、なぜそうなのかが分かる", [
+    "いま自分がどんな気持ちか、たいてい分かる",
+    "なぜそういう気持ちになったのか、理由を言える",
+    "気持ちが変わりはじめたとき、早めに気づく",
+    "自分の気持ちを言葉にするのが、そんなに難しくない",
+    "自分が何を望んでいるかを、自分で分かっている"]],
+  ["相手の気持ちを読む", "表情・声・場の空気から、相手の気持ちを感じ取る", [
+    "相手の表情や声で、気持ちの変化に気づく",
+    "友だちが落ち込んでいるとき、言われなくても分かる",
+    "相手の立場に立って、どう感じているかを想像できる",
+    "グループの空気（盛り上がり・気まずさ）を感じ取れる",
+    "人の気持ちを読み違えることは少ないほうだ"]],
+  ["気持ちを前向きに使う", "やる気や気分を、目標や作業に向けて使える", [
+    "目標を決めると、そこに向けて気持ちを乗せられる",
+    "「自分はできる」と自分に言い聞かせることができる",
+    "うまくいかなくても、気持ちを切り替えて次に向かえる",
+    "やる気が出ないとき、自分なりの出し方を知っている",
+    "楽しい気分を、勉強や作業に生かすことができる"]],
+  ["気持ちを整える", "怒り・落ち込み・緊張を、自分で落ち着かせられる", [
+    "怒ったときも、その場で爆発せずにいられる",
+    "落ち込んでも、時間をかければ自分で立て直せる",
+    "緊張する場面で、自分を落ち着かせる方法を持っている",
+    "感情に任せて、あとで後悔するようなことをすることは少ない",
+    "イライラしているときでも、人に当たらないようにできる"]],
+];
+const SCALE = [[1,"ぜんぜん違う"],[2,"あまり違う"],[3,"どちらとも"],[4,"わりとそう"],[5,"とてもそう"]];
+const $ = s => document.querySelector(s);
+// 面ごとの5問が続かないよう、1問目を全部→2問目を全部…の順に並べる
+const ITEMS = [];
+for (let k = 0; k < 5; k++) FACETS.forEach((f, fi) => ITEMS.push({ f: fi, text: f[2][k] }));
+const N = ITEMS.length;
+const qs = $("#qs");
+ITEMS.forEach((it, i) => {
+  const d = document.createElement("div"); d.className = "q";
+  d.innerHTML = `<div class="n">${i+1} / ${N}</div><div class="t">${it.text}</div><div class="scale">` +
+    SCALE.map(([v,l]) => `<input type="radio" name="q${i}" id="q${i}v${v}" value="${v}"><label for="q${i}v${v}"><b>${v}</b>${l}</label>`).join("") + `</div>`;
+  qs.appendChild(d);
+});
+$("#date").value = new Date().toLocaleDateString("sv-SE");
+function answered() { return ITEMS.map((_, i) => { const r = document.querySelector(`input[name=q${i}]:checked`); return r ? +r.value : null; }); }
+function refresh() {
+  const a = answered(), n = a.filter(v => v !== null).length;
+  $("#cnt").textContent = `${n} / ${N}`; $("#prog").style.width = (n/N*100) + "%";
+  $("#left").textContent = N - n; $("#go").disabled = n < N;
+  if (n === N) $("#go").textContent = "結果を見る";
+}
+qs.addEventListener("change", refresh);
+function show(a) {
+  const sc = FACETS.map(() => 0); a.forEach((v, i) => { sc[ITEMS[i].f] += v; });   // 各 5〜25
+  const max = Math.max(...sc), min = Math.min(...sc);
+  const nick = $("#nick").value.trim(), date = $("#date").value;
+  $("#who").textContent = (nick ? nick + "さん　" : "") + (date ? date.replaceAll("-", "/") : "");
+  $("#facets").innerHTML = FACETS.map((f, i) => {
+    const hi = sc[i] === max && max !== min, lo = sc[i] === min && max !== min;
+    return `<div class="facet ${hi ? "hi" : ""}"><div class="head"><span class="name">${f[0]}${hi ? '<span class="tag hi">いちばん出やすい</span>' : ""}${lo ? '<span class="tag lo">伸びしろ</span>' : ""}</span><span class="sc">${sc[i]} / 25</span></div><div class="b"><i style="width:${(sc[i]-5)/20*100}%"></i></div><div class="desc">${f[1]}</div><div class="write">最近この面が出た場面（または、出せなかった場面）:</div></div>`;
+  }).join("");
+  $("#form").style.display = "none"; $("#result").style.display = "block";
+}
+$("#go").addEventListener("click", () => { const a = answered(); if (a.every(v => v !== null)) { show(a); window.scrollTo(0, 0); } });
+$("#pdf").addEventListener("click", () => window.print());
+$("#redo").addEventListener("click", () => { if (confirm("答えを消して最初からやり直しますか？")) location.reload(); });
+const demo = new URLSearchParams(location.search).get("demo");
+if (demo) { const a = ITEMS.map((it, i) => 1 + ((it.f * 2 + i * 3) % 5)); $("#nick").value = "テスト"; show(a); }
+refresh();
+</script>
+</body>
+</html>
